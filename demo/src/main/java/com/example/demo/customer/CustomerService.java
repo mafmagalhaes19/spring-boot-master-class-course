@@ -12,22 +12,20 @@ import java.util.Objects;
 @Service
 public class CustomerService {
 
-    private final CustomerRepo customerRepo;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(CustomerRepo customerRepo) {
-        this.customerRepo = customerRepo;
+    public CustomerService(CustomerRepository customerRepo) {
+        this.customerRepository = customerRepo;
     }
 
     List<Customer> getCustomers() {
-        return customerRepo.getCustomers();
+        return customerRepository.findAll();
     }
 
     Customer getCustomer( Long id) {
-        return getCustomers()
-                .stream()
-                .filter(customer -> Objects.equals(customer.getId(), id))
-                .findFirst()
+        return customerRepository
+                .findById(id)
                 .orElseThrow(() -> new NotFoundException("Customer with id " + id + " not found"));
     }
 
