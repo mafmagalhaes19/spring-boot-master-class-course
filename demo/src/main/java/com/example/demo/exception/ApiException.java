@@ -1,16 +1,17 @@
 package com.example.demo.exception;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
-public class ApiException {
-    private final String message;
-    private final Throwable throwable;
-    private final HttpStatus httpStatus;
-    private final ZonedDateTime zonedDateTime;
+//Creates everything - getters, constructor, toString
+//@Data
 
-    public ApiException(String message, Throwable throwable, HttpStatus httpStatus, ZonedDateTime zonedDateTime) {
+//Class converted to a record
+//private final, getter, public constructor, equals, hashcode and toString
+public record ApiException(String message, Throwable throwable, HttpStatus httpStatus, ZonedDateTime zonedDateTime) {
+    /*public ApiException(String message, Throwable throwable, HttpStatus httpStatus, ZonedDateTime zonedDateTime) {
         this.message = message;
         this.throwable = throwable;
         this.httpStatus = httpStatus;
@@ -27,9 +28,9 @@ public class ApiException {
 
     public HttpStatus getHttpStatus(){
         return httpStatus;
-    }
+    }*/
 
-    public ZonedDateTime getZonedDateTime(){
+    /*public ZonedDateTime getZonedDateTime(){
         return zonedDateTime;
     }
 
@@ -41,5 +42,5 @@ public class ApiException {
                 ", httpStatus=" + httpStatus +
                 ", zonedDateTime=" + zonedDateTime +
                 '}';
-    }
+    }*/
 }
