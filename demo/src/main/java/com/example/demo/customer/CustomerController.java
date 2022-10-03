@@ -1,6 +1,8 @@
 package com.example.demo.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,14 +13,15 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    //Injects the singleton previous created
     @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping(value = "all")
-    List<Customer> getCustomers() {
-        return customerService.getCustomers();
+    ResponseEntity<List<Customer>> getCustomers() {
+        return new ResponseEntity<>(customerService.getCustomers(), HttpStatus.OK);
     }
 
     @PostMapping
